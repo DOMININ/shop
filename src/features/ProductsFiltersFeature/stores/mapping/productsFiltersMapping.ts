@@ -2,7 +2,7 @@ import { path } from 'ramda';
 import { checkNumberField } from '@/shared/mapping/validation/checkNumberField';
 import { checkStringField } from '@/shared/mapping/validation/checkStringField';
 import { APIProductsFilters } from '../../services/productsFiltersApiService.types';
-import { ProductsFilters } from '../../types';
+import { ProductsFilters } from '../store.types';
 
 const propertiesMapping = (
 	properties: APIProductsFilters['properties']
@@ -27,6 +27,7 @@ export const productsFiltersMapping = (
 
 	return filters.map(i => {
 		return {
+			...i,
 			id: checkStringField(path(['id'], i)),
 			title: checkStringField(path(['title'], i)),
 			properties: propertiesMapping(path(['properties'], i)),

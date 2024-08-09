@@ -14,52 +14,51 @@ export const ProductsFiltersFeature = () => {
 		setCheckedFilters(selectedFilters);
 	}, [selectedFilters]);
 
-	const handleCheckboxChange = (filterId: string, propertyId: number) => {
-		setCheckedFilters(prev => {
-			const currentFilterValues = prev[filterId] || [];
-			const isChecked = currentFilterValues.includes(propertyId);
+	// const handleCheckboxChange = (filterId: string, propertyId: number) => {
+	// 	setCheckedFilters(prev => {
+	// 		const currentFilterValues = prev[filterId] || [];
+	// 		const isChecked = currentFilterValues.includes(propertyId);
 
-			const updatedFilters = {
-				...prev,
-				[filterId]: isChecked
-					? currentFilterValues.filter(id => id !== propertyId)
-					: [...currentFilterValues, propertyId],
-			};
+	// 		const updatedFilters = {
+	// 			...prev,
+	// 			[filterId]: isChecked
+	// 				? currentFilterValues.filter(id => id !== propertyId)
+	// 				: [...currentFilterValues, propertyId],
+	// 		};
 
-			if (!updatedFilters[filterId].length) {
-				delete updatedFilters[filterId];
-			}
+	// 		if (!updatedFilters[filterId].length) {
+	// 			delete updatedFilters[filterId];
+	// 		}
 
-			return updatedFilters;
-		});
-	};
+	// 		return updatedFilters;
+	// 	});
+	// };
 
 	return (
 		<div>
 			<LinkBackButton href='/' />
 
 			{filters.map(filter => (
-				<div key={filter.id}>
-					<h3>{filter.title}</h3>
-					{filter.properties.map(property => (
-						<label key={property.id}>
+				<div key={filter.name}>
+					<h3>{filter.name}</h3>
+					{filter.availableValues.map(property => (
+						<label key={property}>
 							<input
 								type='checkbox'
-								value={property.title}
-								checked={
-									checkedFilters[filter.id]?.includes(property.id) || false
-								}
-								onChange={() => handleCheckboxChange(filter.id, property.id)}
+								value={property}
+								checked={filter.isValueChecked(property)}
+								// TODO Нужно обновлять стор
+								onChange={() => filter.setValue(property)}
 							/>
-							{property.title}
+							{property}
 						</label>
 					))}
 				</div>
 			))}
 
-			{!!Object.keys(checkedFilters).length && (
+			{/* {!!Object.keys(checkedFilters).length && (
 				<button onClick={() => saveFilters(checkedFilters)}>Show</button>
-			)}
+			)} */}
 		</div>
 	);
 };

@@ -22,6 +22,7 @@ export const useGetProductsFilters = () => {
 			arrayFormat: 'bracket',
 		})}`;
 
+		// использовать useRouter
 		window.history.pushState(null, '', filterUrlParams);
 	};
 
