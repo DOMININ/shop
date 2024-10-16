@@ -13,11 +13,14 @@ type Props = ProductItemActions & {
 	products: ProductItemDataView[];
 };
 
+// при скроле происходит много вызовов этого компонента
 export const ProductsVirtualList = ({ products, ...rest }: Props) => {
 	const { listRef, visibleItems, containerProps, wrapperProps } =
 		useVirtualList<ProductItemDataView>(products, 200);
 	const { fetchProductsNextPage } = useFetchProductsNextPage();
+	console.log('ProductsVirtualList')
 
+	// Подумать над тем, чтобы обернуть ProductsVirtualList еще одним компонентом в котором будет реализация подгрузки
 	useInfinityScroll(listRef, () => {
 		fetchProductsNextPage();
 	});

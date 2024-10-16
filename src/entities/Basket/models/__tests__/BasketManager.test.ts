@@ -1,6 +1,6 @@
-import { IBasket } from '../types';
-import { BasketManager } from './BasketManager';
-
+import { IBasket } from '../../types';
+import { BasketManager } from '../BasketManager';
+// TODO: Сделать отдельную папку __tests__
 const product = {
 	id: 1,
 	title: 'Elegant Wooden Car',

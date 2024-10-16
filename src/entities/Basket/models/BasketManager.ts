@@ -38,10 +38,13 @@ export class BasketManager {
 	}
 
 	handleUpdateBrowserStorage() {
+		// Лучше, чтобы класс принимал модель для работы с хранилищем, но не знал как обновлять это хранилище
+		// Также как и со стором
 		BrowserStorage.setItemLocalStorage(BASKET_KEY, JSON.stringify(this.basket));
 	}
 
 	updateProductsPrices(products: IBasketProduct[]) {
+		const oldPrice = this.basket.totalPrice;
 		const productsInBasketWithActualPrice = this.basket.products.map(
 			product => {
 				const productInBasket = products.find(p => p.id === product.id);
@@ -63,6 +66,9 @@ export class BasketManager {
 			this.basket.productsCount
 		);
 		this.handleUpdateBrowserStorage();
+		const newPrice = this.basket.totalPrice;
+		if (newPrice !== oldPrice)
+			this.isPricesChanged = true;
 	}
 
 	restoreBasketFromLocalStorage() {

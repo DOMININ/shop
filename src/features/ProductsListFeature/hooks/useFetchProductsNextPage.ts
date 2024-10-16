@@ -1,5 +1,6 @@
 import { productsStore } from '../stores/productsStore';
 
+// TODO: Сделать методом fetchmore внутри хука useGetProducts
 export const useFetchProductsNextPage = () => {
 	const limit = productsStore(state => state.limit);
 	const page = productsStore(state => state.page);

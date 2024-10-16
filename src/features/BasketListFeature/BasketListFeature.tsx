@@ -9,6 +9,7 @@ export const BasketListFeature = () => {
 	const { basketManager } = useGetBasketManager();
 	const { toast } = useToast();
 
+	// Думаю можно было научить BasketManager отправлять нотификашки, также через DI
 	useEffect(() => {
 		if (basketManager.isPricesChanged) {
 			toast({

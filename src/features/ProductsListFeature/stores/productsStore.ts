@@ -17,6 +17,7 @@ interface ProductsState {
 	getProductsNextPageAction: () => void;
 }
 
+// TODO: Возможно стор будет не нужен
 export const productsStore = create<ProductsState>((set, get) => ({
 	products: [],
 	status: 'idle',
@@ -47,6 +48,7 @@ export const productsStore = create<ProductsState>((set, get) => ({
 			.finally(() => set({ status: 'loaded' }));
 	},
 
+	// Заменить получение списка продуктов на из стора на RTK ReactQuery
 	getProductsNextPageAction: () => {
 		const { page, limit, products } = get();
 

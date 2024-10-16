@@ -4,6 +4,15 @@ import { useGetBasketManager } from '@/entities/Basket/hooks/useGetBasketManager
 import { ProductItemDataView } from '../ProductsItem/ProductsItem';
 import { ProductId } from '@/shared/types/product';
 
+/**
+ * 
+ * Сделать универсальный хук получения списка продуктов который будет тут использоваться
+ * /entity/product/hooks
+ * const { products, fetchMore, isLoading, isError } = useGetProducts();
+ * 1. Умеет загружать продукты через reactQuery
+ * 2. Есть метод пагинации fetchMore
+ * 3. Хранит стейт продукта и постоянно его обновляет
+ */
 export const useGetProducts = () => {
 	const status = productsStore(state => state.status);
 	const productsList = productsStore(state => state.products);

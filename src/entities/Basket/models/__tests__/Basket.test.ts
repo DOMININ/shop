@@ -1,4 +1,4 @@
-import { Basket } from './Basket';
+import { Basket } from '../Basket';
 
 const product = {
 	id: 1,
