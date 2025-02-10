@@ -8,9 +8,9 @@ interface Props {
 }
 
 export const useGetProducts = ({ ssrProducts }: Props) => {
-  let ssrData = ssrProducts;
-  const isHaveSsrData = ssrData.length;
+  const isHaveSsrData = ssrProducts.length;
   const limit = 100;
+  console.log('ssrProducts',ssrProducts)
 
   const {
     data = [],
@@ -27,25 +27,22 @@ export const useGetProducts = ({ ssrProducts }: Props) => {
 
       return hasMore ? lastPage.page + 1 : null;
     },
+    initialData: isHaveSsrData ? {
+      pages: [
+        {
+          page: 1,
+          products: [...ssrProducts],
+          total: 1000,
+        }
+      ],
+      pageParams: [1],
+    } : undefined,
     select: data => data.pages.flatMap(page => productMapping(page.products)),
     enabled: !isHaveSsrData,
   });
 
-  if (isHaveSsrData) {
-    const ssrObj = {
-      productsList: [...ssrData],
-      status: 'success',
-      fetchNextPage,
-      hasNextPage,
-    };
-
-    ssrData = [];
-
-    return ssrObj;
-  }
-
   return {
-    productsList: data,
+    productsList: isHaveSsrData ? [...ssrProducts] : data,
     status,
     fetchNextPage,
     hasNextPage,

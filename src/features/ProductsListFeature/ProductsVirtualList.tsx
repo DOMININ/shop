@@ -25,10 +25,7 @@ export const ProductsVirtualList = ({
     useVirtualList<ProductItemDataView>(products, 70);
 
   useInfiniteScroll(listRef, () => {
-    console.log('1');
-    fetchNextPage();
     if (hasNextPage) {
-      console.log('2');
       fetchNextPage();
     }
   });
